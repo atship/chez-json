@@ -180,7 +180,7 @@
 
   (define (read-object parser)
     (let loop ((c (parser-peek-char parser))
-               (pairs (make-hashtable equal-hash equal?)))
+               (pairs (make-eq-hashtable)))
       (case c
         ;; Skip whitespaces
         ((#\tab #\vtab #\newline #\return #\space)
@@ -193,7 +193,7 @@
         ;; Read one pair and continue
         ((#\")
          (let ((pair (read-pair parser)))
-           (hashtable-set! pairs (car pair) (cdr pair))
+           (hashtable-set! pairs (string->symbol (car pair)) (cdr pair))
            (loop (parser-peek-char parser) pairs)))
         ;; Skip comma and read more pairs
         ((#\,)
