@@ -146,7 +146,8 @@
     (display "]" port))
 
   (define (json-build-object scm port escape pretty level)
-    (build-newline port pretty)
+    (if (> level 0)
+	(build-newline port pretty))
     (format port "~A{" (indent-string pretty level))
     (build-newline port pretty)
     (let ((pairs scm))
