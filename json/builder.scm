@@ -68,7 +68,7 @@
   (define (build-object-pair p port escape pretty level)
     (display (indent-string pretty level) port)
     (json-build-string (car p) port escape)
-    (display " : " port)
+    (display ":" port)
     (if (list? (cdr p))
 	(if (null? (cdr (cdr p)))
 	    (json-build (car (cdr p)) port escape pretty level)
